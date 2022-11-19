@@ -17,10 +17,10 @@ public class HelloControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("-- Return Hello 리턴됩니다. --")
+    @DisplayName("-- Hello + user 이름이 리턴됩니다. --")
     public void helloTest() throws Exception {
-        String returnValue = "hello";
-        final String user = "Moongg";
+        final String user = "홍길동";
+        String expectedValue = "Hello "+user+", Have a Hard Work!!!";
 
         URI targetUrl = UriComponentsBuilder.fromUriString("/hello")
                 .queryParam("user", user)
@@ -30,6 +30,6 @@ public class HelloControllerTest {
 
         String message = this.restTemplate.getForObject(targetUrl, String.class);
         System.out.println(message);
-        assertEquals("Hello "+user+", Have a Hard Work!!!", message);
+        assertEquals(expectedValue, message);
     }
 }
